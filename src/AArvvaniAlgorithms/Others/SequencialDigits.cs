@@ -23,10 +23,11 @@ namespace AArvaniAlgorithms.Others
         */
 
 
-      
-        public static List<int> BruteForce(int low, int hight) {
 
-            List<int> allOptions = new List<int>() 
+        public static List<int> BruteForce(int low, int hight)
+        {
+
+            List<int> allOptions = new List<int>()
             {
                 12,23,34,56,78,89,
                 123,234,345,456,567,678,789,
@@ -40,9 +41,12 @@ namespace AArvaniAlgorithms.Others
             List<int> response = new List<int>();
             foreach (var item in allOptions)
             {
-                if (item >= low && item <= hight) {
+                if (item >= low && item <= hight)
+                {
                     response.Add(item);
-                } else if (item > hight) {
+                }
+                else if (item > hight)
+                {
                     break;
                 }
             }
@@ -52,7 +56,7 @@ namespace AArvaniAlgorithms.Others
 
         public static List<int> BruteForceDynamic(int low, int hight)
         {
-                        
+
             List<int> response = new List<int>();
             for (int i = 1; i < 10; ++i)
             {
@@ -66,58 +70,54 @@ namespace AArvaniAlgorithms.Others
                     }
                 }
             }
-            response = response.OrderBy( p => p).ToList();
+            response = response.OrderBy(p => p).ToList();
             return response;
         }
 
-        public static List<int> DepthFirstSearch() {
+        public static List<int> DepthFirstSearch(int low, int hight)
+        {
 
             List<int> response = new List<int>();
 
-            //    class Solution
-            //    {
-            //        public:
-            //vector<int> sequentialDigits(int low, int high)
-            //        {
-            //            vector<int> res;
-            //            for (int i = 1; i <= 9; ++i)
-            //            {
-            //                vector<int> v = dfs(low, high, i);
-            //                if (!v.empty())
-            //                {
-            //                    res.insert(res.end(), begin(v), end(v));
-            //                }
-            //            }
-            //            sort(begin(res), end(res));
-            //            return res;
-            //        }
-
-            //        private:
-            //vector<int> dfs(int low, int high, int cur = 0)
-            //        {
-            //            vector<int> res;
-            //            if (cur >= low && cur <= high)
-            //            {
-            //                res.push_back(cur);
-            //            }
-            //            if (cur >= high)
-            //            {
-            //                return res;
-            //            }
-            //            int x = cur % 10;
-            //            if (x != 9)
-            //            {
-            //                vector<int> v = dfs(low, high, cur * 10 + x + 1);
-            //                if (!v.empty())
-            //                {
-            //                    res.insert(res.end(), begin(v), end(v));
-            //                }
-            //            }
-            //            return res;
-            //        }
+            for (int i = 1; i <= 9; ++i)
+            {
+                List<int> v = dfs(low, hight, i);
+                if (v.Any())
+                {
+                    response.AddRange(v);
+                }
+            }
+            
+            response = response.OrderBy(p => p).ToList();
 
             return response;
         }
 
-    }    
+        private static List<int> dfs(int low, int high, int cur = 0)
+        {
+            List<int> res = new List<int>();
+            if (cur >= low && cur <= high)
+            {
+                res.Add(cur);
+            }
+            
+            if (cur >= high)
+            {
+                return res;
+            }
+            int x = cur % 10;
+            if (x != 9)
+            {
+                List<int> v = dfs(low, high, cur * 10 + x + 1);
+                if (v.Any())
+                {
+                    //res.insert(res.end(), begin(v), end(v));
+                    res.AddRange(v);
+                }
+            }
+            
+            return res;
+        }
+
+    }
 }

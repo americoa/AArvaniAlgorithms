@@ -10,7 +10,7 @@ namespace AarvaniAlgorithms.Tests
     public class AllTests
     {
         [TestMethod]
-        public void SelectyionSort()
+        public void SelectionSort()
         {
             int[] numbers = { 10, 6, 9, 5 };
             new SelectionSort().Sort(numbers);
@@ -81,6 +81,20 @@ namespace AarvaniAlgorithms.Tests
 
             //assert
             CollectionAssert.AreEqual(expect, result);
+        }
+
+        [TestMethod]
+        [DataRow(100,400,new[]{123, 234, 345})]
+        [DataRow(1000,13000,new[]{1234,2345,3456,4567,5678,6789,12345})]
+        public void SequentialDepthFirstSearch(int low, int right , int[] expect)
+        {
+            //arrange
+     
+            //act
+            List<int> result = SequencialDigits.DepthFirstSearch(low, right);
+
+            //assert
+            CollectionAssert.AreEqual(expect, result.ToArray());
         }
     }
 }
