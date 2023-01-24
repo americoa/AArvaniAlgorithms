@@ -1,4 +1,5 @@
 using AArvaniAlgorithms.Others;
+using AArvvaniAlgorithms.Graph;
 using AArvvaniAlgorithms.Search;
 using AArvvaniAlgorithms.Sort;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -94,6 +95,35 @@ namespace AarvaniAlgorithms.Tests
             List<int> result = SequencialDigits.DepthFirstSearch(low, right);
 
             //assert
+            CollectionAssert.AreEqual(expect, result.ToArray());
+        }
+
+        [TestMethod]
+        public void SymmetricTree(){
+            // arrange
+            TreeNode node = new TreeNode(1);
+            node.left = new TreeNode(2);
+            node.right = new TreeNode(2);
+
+            var symmetricTree  = new SymmetricTree(node);
+            // assert 
+            symmetricTree.IsSymmetricTree();
+            // act
+        }
+
+        //https://www.geeksforgeeks.org/top-50-graph-coding-problems-for-interviews/
+
+        [TestMethod]
+        public void GraphDfs(){
+            var graph = new GraphDfs(11); 
+            graph.InsertEdge(2,1);
+            graph.InsertEdge(2,5);
+            graph.InsertEdge(5,6);
+            graph.InsertEdge(5,8);
+            graph.InsertEdge(6,9);
+            var result = graph.DFS(2);
+            //2,5,8,6,9,1
+            var expect = new int[]{ 2,5,8,6,9,1};
             CollectionAssert.AreEqual(expect, result.ToArray());
         }
     }
